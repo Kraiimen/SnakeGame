@@ -3,7 +3,6 @@ package carmineerario.main;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -18,14 +17,11 @@ import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
-import javax.swing.text.PlainDocument;
 
 
 //TODO DA RISOLVERE IL PROBLEMA DEL PUNTEGGIO, NON SI RESETTA
 
 public class PlayAgainPanel extends JPanel{
-	private final int BUTTONS_WIDTH = 160;
-	private final int BUTTONS_HEIGHT = 50;
 	GamePanel gp = (GamePanel) MainFrame.gamePanel;
 	private GameConfig.RecordsArray player;
 	
@@ -85,6 +81,9 @@ public class PlayAgainPanel extends JPanel{
 		/* ----------- */
 		
 		/* BUTTONS */
+		final int BUTTONS_WIDTH = 160;
+		final int BUTTONS_HEIGHT = 50;
+
 		// Save player name and record button
 		JButton savePlayerNameBtn = new JButton("Save record");
 		savePlayerNameBtn.setFocusable(false);
@@ -92,7 +91,7 @@ public class PlayAgainPanel extends JPanel{
 		savePlayerNameBtn.setPreferredSize(new Dimension(130, 40));	
 		savePlayerNameBtn.setVisible(false);
 		savePlayerNameBtn.addActionListener(e -> {
-			player.playerName = playerName.getText();
+			player.setPlayerName(playerName.getText());
 			// salvare il record del giocatore
 		});
 		
@@ -153,17 +152,17 @@ public class PlayAgainPanel extends JPanel{
 	}
 	
 	
-	class CharacterLimitFilter extends DocumentFilter {
-	    private int maxChars;
+	static class CharacterLimitFilter extends DocumentFilter {
+	    private final int MAX_CHARS;
 
 	    public CharacterLimitFilter(int maxChars) {
-	        this.maxChars = maxChars;
+	        this.MAX_CHARS = maxChars;
 	    }
 
 	    @Override
 	    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
 	    	// Check if, adding the new text, it stays in the limit
-	        if (fb.getDocument().getLength() + string.length() <= maxChars) {
+	        if (fb.getDocument().getLength() + string.length() <= MAX_CHARS) {
 	            super.insertString(fb, offset, string.toUpperCase(), attr);
 	        }
 	    }
@@ -171,7 +170,7 @@ public class PlayAgainPanel extends JPanel{
 	    @Override
 	    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
 	    	// Check if, replacing the current text, it stays in the limit
-	        if (fb.getDocument().getLength() - length + text.length() <= maxChars) {
+	        if (fb.getDocument().getLength() - length + text.length() <= MAX_CHARS) {
 	            super.replace(fb, offset, length, text.toUpperCase(), attrs);
 	        }
 	    }

@@ -11,9 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class RecordsPanel extends JPanel{
-	private final int BUTTONS_WIDTH = 160;
-	private final int BUTTONS_HEIGHT = 50;
-	
 	static List<GameConfig.RecordsArray> records;
 	
 	RecordsPanel() {
@@ -25,28 +22,31 @@ public class RecordsPanel extends JPanel{
 		recordsLabel.setFont(new Font(null, Font.BOLD, 40));
 		recordsLabel.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JLabel player1 = new JLabel(records.get(0).playerName+": "+records.get(0).playerRecord);
+		JLabel player1 = new JLabel(records.getFirst().getPlayerName()+": "+records.getFirst().getPlayerRecord());
 		player1.setFont(new Font(null, Font.BOLD, 25));
 		player1.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JLabel player2 = new JLabel(records.get(1).playerName+": "+records.get(1).playerRecord);
+		JLabel player2 = new JLabel(records.get(1).getPlayerName()+": "+records.get(1).getPlayerRecord());
 		player2.setFont(new Font(null, Font.BOLD, 25));
 		player2.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JLabel player3 = new JLabel(records.get(2).playerName+": "+records.get(2).playerRecord);
+		JLabel player3 = new JLabel(records.get(2).getPlayerName()+": "+records.get(2).getPlayerRecord());
 		player3.setFont(new Font(null, Font.BOLD, 25));
 		player3.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JLabel player4 = new JLabel(records.get(3).playerName+": "+records.get(3).playerRecord);
+		JLabel player4 = new JLabel(records.get(3).getPlayerName()+": "+records.get(3).getPlayerRecord());
 		player4.setFont(new Font(null, Font.BOLD, 25));
 		player4.setAlignmentX(CENTER_ALIGNMENT);
 		
-		JLabel player5 = new JLabel(records.get(4).playerName+": "+records.get(4).playerRecord);
+		JLabel player5 = new JLabel(records.getLast().getPlayerName()+": "+records.getLast().getPlayerRecord());
 		player5.setFont(new Font(null, Font.BOLD, 25));
 		player5.setAlignmentX(CENTER_ALIGNMENT);
 		/* ------ */
 		
 		/* BUTTONS */
+		final int BUTTONS_WIDTH = 160;
+		final int BUTTONS_HEIGHT = 50;
+
 		// BACK TO HOME BUTTON
 		JButton backBtn = new JButton("\u2B05 Back to home");
 		backBtn.setFocusable(false);

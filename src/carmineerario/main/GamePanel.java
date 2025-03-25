@@ -6,8 +6,7 @@ import javax.swing.*;
 import javax.swing.Timer;
 import java.util.*;
 
-//DA MODIFICARE: SCRITTA SPACE TO START DEVE COMPARIRE ANCHE DOPO IL PLAY AGAIN
-
+//TODO Quando viene cliccato space dopo il play again, il gioco non parte ma finisce subito
 
 public class GamePanel extends JPanel implements ActionListener{
 	
@@ -15,8 +14,8 @@ public class GamePanel extends JPanel implements ActionListener{
 	private final int PANEL_HEIGHT = 500;
 	private final int UNIT_SIZE = 20;
 	private final int MAX_UNITS = (PANEL_WIDTH*PANEL_HEIGHT)/UNIT_SIZE;
-	private final int snakeX[] = new int[MAX_UNITS];
-	private final int snakeY[] = new int[MAX_UNITS];
+	private final int[] snakeX = new int[MAX_UNITS];
+	private final int[] snakeY = new int[MAX_UNITS];
 	private int appleX, appleY, applesEaten;
 	private int bodyParts = 4;
 	private int delay;
@@ -26,7 +25,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	Random random;
 	Timer timer;
 	
-	int snakeColor[] = new int[3];
+	int[] snakeColor = new int[3];
 	
 	JLabel scoreLabel = new JLabel("Score: "+applesEaten);
 	JLabel startLabel = new JLabel("Press space to start");
@@ -123,7 +122,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		
 		//If the game is not running
 		else {
-			running = false;
+//			running = false;
 			MainFrame.showPanel("PlayAgain Panel");
 		}
 	}
@@ -229,7 +228,7 @@ public class GamePanel extends JPanel implements ActionListener{
 	    startLabel.setVisible(true);
 	    
 	    for (int i = 0; i < bodyParts; i++) {
-	        snakeX[i] = 0 - (i * UNIT_SIZE);
+	        snakeX[i] = (i * UNIT_SIZE);
 	        snakeY[i] = 0;
 	    }
 	    

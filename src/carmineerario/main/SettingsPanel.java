@@ -4,11 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 
-import java.io.IOException;
 import java.util.Hashtable;
 
 import javax.swing.Box;
@@ -20,8 +16,6 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 
 public class SettingsPanel extends JPanel{
-	private final int BUTTONS_WIDTH = 160;
-	private final int BUTTONS_HEIGHT = 50;
 	JSlider slider = new JSlider(0,100);
 	GamePanel gp = (GamePanel) MainFrame.gamePanel;
 	int value = 0;
@@ -31,6 +25,9 @@ public class SettingsPanel extends JPanel{
 //		GameConfig.loadSnakeColor();
 		
 		/* BUTTONS */
+		final int BUTTONS_WIDTH = 160;
+		final int BUTTONS_HEIGHT = 50;
+
 		// CHANGE SNAKE COLOR BUTTON
 		JButton colorBtn = new JButton("Change snake color");
 		colorBtn.setFocusable(false);
@@ -79,8 +76,8 @@ public class SettingsPanel extends JPanel{
 			value = slider.getValue();
 			
 			if(value > 81) slider.setValue(100);
-			else if(value > 48 && value <= 81) slider.setValue(66);
-			else if(value > 15 && value <= 48) slider.setValue(33);
+			else if(value > 48) slider.setValue(66);
+			else if(value > 15) slider.setValue(33);
 			else slider.setValue(0);
 			
 			this.setDifficultyValue(value);

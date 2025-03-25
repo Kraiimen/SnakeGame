@@ -1,6 +1,5 @@
 package carmineerario.main;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.Box;
@@ -10,10 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 
 public class HomePanel extends JPanel {
-    // BUTTONS
-    private final int BUTTONS_WIDTH = 160;
-    private final int BUTTONS_HEIGHT = 50;
-    
     HomePanel(){
         /* GAME TITLE */
         JLabel gameNameTitle = new JLabel("Snake Game");
@@ -22,6 +17,9 @@ public class HomePanel extends JPanel {
         /* --------------- */
         
         /* BUTTONS */
+        final int BUTTONS_WIDTH = 160;
+        final int BUTTONS_HEIGHT = 50;
+
         // PLAY BUTTON
         JButton playBtn = new JButton("Play");
         playBtn.setFocusable(false);

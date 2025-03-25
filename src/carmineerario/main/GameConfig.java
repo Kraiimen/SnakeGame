@@ -14,11 +14,11 @@ public class GameConfig {
 	private static final String SETTINGS_JSON_PATH = "database/settings.json";
 	private static final String RECORDS_JSON_PATH = "database/records.json";
 	private static final Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	
+
 	//Class to deserialize settings Json file
 	static class Config{
 		int difficulty;
-		int snakeColorArr[] = new int[3];
+		int[] snakeColorArr = new int[3];
 	}
 	
 	static class Records{
@@ -32,9 +32,14 @@ public class GameConfig {
 			this.playerRecord = playerRecord;
 		}
 		
-		String playerName;
-		int playerRecord;
-		
+		private String playerName;
+		private int playerRecord;
+
+		public void setPlayerName(String playerName) { this.playerName = playerName; }
+		public void setPlayerRecord(int playerRecord) { this.playerRecord = playerRecord; }
+		public String getPlayerName() { return this.playerName; }
+		public int getPlayerRecord() { return this.playerRecord; }
+
 		@Override
 		public int compareTo(GameConfig.RecordsArray other) {
 			return Integer.compare(other.playerRecord, this.playerRecord);
@@ -57,13 +62,12 @@ public class GameConfig {
 			System.out.println("Saving config: " + gson.toJson(config));
 			gson.toJson(config, writer);
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println("FileWriter: Json file not found!");
 		}
 	}
 	
 	//Method to save records to Json file
-	public static void saveRecords(List<RecordsArray> records) {
+	 static void saveRecords(List<RecordsArray> records) {
 		Records rec = new Records();
 		rec.records = records;
 		
@@ -71,13 +75,12 @@ public class GameConfig {
 			System.out.println("Saving records: " + gson.toJson(rec));
 			gson.toJson(rec, writer);
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println("FileWriter: Json file not found!");
 		}
 	}
 	
 	// Method to save a new record into the top 5
-	public static void saveNewRecord(RecordsArray player) {
+	 static void saveNewRecord(RecordsArray player) {
 		List<RecordsArray> tempRecords = loadRecords();
 		
 		System.out.println("tempRecords: " + tempRecords.toString());
@@ -116,12 +119,12 @@ public class GameConfig {
 	
 	public static boolean canRecordBeSaved(int playerRecord) {
 		List<RecordsArray> tempRecords = loadRecords();
-		
-		for(int i = 0; i < tempRecords.size(); i++) {
-			if(playerRecord >= tempRecords.get(i).playerRecord) {
-				return true;
-			}
-		}
+
+        for (RecordsArray tempRecord : tempRecords) {
+            if (playerRecord >= tempRecord.playerRecord) {
+                return true;
+            }
+        }
 		
 		return false;
 	}
@@ -131,7 +134,6 @@ public class GameConfig {
 		try (FileReader reader = new FileReader(SETTINGS_JSON_PATH)){
 			return gson.fromJson(reader, Config.class).difficulty;
 		} catch (IOException e) {
-			e.printStackTrace();
 			System.out.println("FileReader: Json file not found!");
 			
 			//If the file is not found, return 80 as the default difficulty
@@ -145,7 +147,6 @@ public class GameConfig {
 			FileReader reader = new FileReader(SETTINGS_JSON_PATH);
 			return gson.fromJson(reader, Config.class).snakeColorArr;
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			System.out.println("FileReader: Json file not found!");
 			
 			//If the file is not found, it returns the RGB value for black
@@ -161,7 +162,6 @@ public class GameConfig {
 //			Collections.sort(temp);
 			return temp;
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			System.out.println("FileReader: Json file not found!");
 			
 			//If the file is not found, it returns a predetermined list
