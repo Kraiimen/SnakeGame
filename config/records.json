@@ -1,0 +1,24 @@
+{
+  "records": [
+    {
+      "playerName": "ABC",
+      "playerRecord": 1
+    },
+    {
+      "playerName": "123",
+      "playerRecord": 1
+    },
+    {
+      "playerName": "ABC",
+      "playerRecord": 1
+    },
+    {
+      "playerName": "LOL",
+      "playerRecord": 1
+    },
+    {
+      "playerName": "789",
+      "playerRecord": 1
+    }
+  ]
+}
