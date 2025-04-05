@@ -2,6 +2,7 @@ package carmineerario.panels;
 
 import carmineerario.config.GameConfig;
 import carmineerario.main.MainFrame;
+import com.google.gson.annotations.SerializedName;
 import com.sun.tools.javac.Main;
 
 import java.awt.*;

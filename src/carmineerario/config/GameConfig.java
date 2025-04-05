@@ -73,35 +73,18 @@ public class GameConfig {
 	// Method to save a new record into the top 5
 	public static void saveNewRecord(Player player) {
 		List<Player> tempRecords = loadRecords();
-
 		int newRecordToSave = player.playerRecord;
-		int saveRecordPos = 0;
 
-		// FIXME aggiustare algoritmo dei record, non si comporta come dovrebbe
-		// FIXME se ci sono più record dello stesso valore, lo salva appena trova il primo uguale, senza controllare fino in fondo
-
-		// Check if new record is greater or equal to saved record
-		for (int i = 0;  i < tempRecords.size(); i++) {
-			Player currentPlayer = tempRecords.get(i);
-
-			// If greater we overwrite the saved record with the new one
-			if(newRecordToSave > currentPlayer.playerRecord) {
-				saveRecordPos = i;
-				break;
-			}
-			// If equal we save the record into the position before the saved record
-			else if(newRecordToSave == currentPlayer.playerRecord) {
-				saveRecordPos = i + 1;
-				break;
-			}
+		int insertPos = 0;
+		while (insertPos < tempRecords.size() && tempRecords.get(insertPos).playerRecord >= newRecordToSave){
+			insertPos++;
 		}
 
-		// Move each record by one to make space for the new one
-		for(int i = tempRecords.size() - 1; i > saveRecordPos; i--) {
-			tempRecords.set(i, tempRecords.get(i-1));
-		}
+		tempRecords.add(insertPos, player);
 
-		tempRecords.set(saveRecordPos, player);
+		if (tempRecords.size() > 5){
+			tempRecords.removeLast();
+		}
 
 		System.out.println(tempRecords);
 		saveRecords(tempRecords);
@@ -112,11 +95,11 @@ public class GameConfig {
 		List<Player> tempRecords = loadRecords();
 
 		if(!(playerRecord == tempRecords.getLast().playerRecord())){
-			for (int i=0; i<tempRecords.size(); i++) {
-				if (playerRecord >= tempRecords.get(i).playerRecord()) {
-					return true;
-				}
-			}
+            for (Player player : tempRecords) {
+                if (playerRecord >= player.playerRecord()) {
+                    return true;
+                }
+            }
 		}
 
 		return false;
@@ -124,22 +107,21 @@ public class GameConfig {
 	
 	//Method to get difficulty value from Json file
 	public static int loadDifficulty() {
-		try (FileReader reader = new FileReader(SETTINGS_JSON_PATH)){
-			return gson.fromJson(reader, Config.class).getDifficulty();
-		} catch (IOException e) {
-			System.out.println("FileReader: Json file not found!");
-			
-			//If the file is not found, return 80 as the default difficulty
-			return 80;
-		}
+        try (FileReader reader = new FileReader(SETTINGS_JSON_PATH)) {
+            return gson.fromJson(reader, Config.class).getDifficulty();
+        } catch (IOException e) {
+            System.out.println("FileReader: Json file not found!");
+
+            //If the file is not found, return 80 as the default difficulty
+            return 80;
+        }
 	}
 	
 	//Method to get snakeColor value from Json file
 	public static int[] loadSnakeColor() {
-		try {
-			FileReader reader = new FileReader(SETTINGS_JSON_PATH);
+		try (FileReader reader = new FileReader(SETTINGS_JSON_PATH)) {
 			return gson.fromJson(reader, Config.class).getSnakeColorArr();
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			System.out.println("FileReader: Json file not found!");
 			
 			//If the file is not found, it returns the RGB value for black
@@ -149,10 +131,9 @@ public class GameConfig {
 	
 	//Method to get records values from Json file
 	public static List<Player> loadRecords(){
-		try {
-			FileReader reader = new FileReader(RECORDS_JSON_PATH);
+		try (FileReader reader = new FileReader(RECORDS_JSON_PATH)) {
 			return gson.fromJson(reader, Records.class).records;
-		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			System.out.println("FileReader: Json file not found!");
 			
 			//If the file is not found, it returns a predetermined list
