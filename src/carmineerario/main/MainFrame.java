@@ -4,6 +4,7 @@ import carmineerario.config.GameConfig;
 import carmineerario.panels.*;
 
 import java.awt.*;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -24,7 +25,7 @@ public class MainFrame extends JFrame{
 	public static PlayAgainPanel playAgainPanel = (PlayAgainPanel) PLAY_AGAIN_PANEL;
 	public static RecordsPanel recordsPanel = (RecordsPanel) RECORDS_PANEL;
 
-	MainFrame(){		
+	MainFrame(){
 		/* CARD LAYOUT */
 		CARD_PANEL.add(HOME_PANEL, "Homepage Panel");
 		CARD_PANEL.add(GAME_PANEL, "Game Panel");
@@ -35,13 +36,15 @@ public class MainFrame extends JFrame{
 		
 		/* FRAME */
 		// Icon: https://icons8.com/icon/yGwrZYYkmgaX/year-of-snake
-		this.setIconImage(new ImageIcon("assets/icons/snakeIcon.png").getImage());
+		URL imageURL = getClass().getClassLoader().getResource("assets/icons/snakeIcon.png");
+		if(imageURL != null){
+			this.setIconImage(new ImageIcon(imageURL).getImage());
+		}
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setTitle("Snake Game");
-		
 		this.add(CARD_PANEL);
-		
 		this.pack();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -67,4 +70,6 @@ public class MainFrame extends JFrame{
 		if(panelName.equals("Game Panel"))
 			GAME_PANEL.requestFocusInWindow();
 	}
+
+
 }

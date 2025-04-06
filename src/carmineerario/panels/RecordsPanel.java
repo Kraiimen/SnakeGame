@@ -4,6 +4,7 @@ import carmineerario.config.GameConfig;
 import carmineerario.main.MainFrame;
 
 import java.awt.*;
+import java.net.URL;
 import java.util.List;
 
 import javax.swing.*;
@@ -83,7 +84,10 @@ public class RecordsPanel extends JPanel {
 		if(pos == 0){
 			nameLabel.setFont(new Font(null, Font.BOLD, 32));
 			// Icon: https://icons8.com/icon/33852/medal-first-place
-			nameLabel.setIcon(new ImageIcon("assets/icons/firstPlace.png"));
+			URL imageURL = getClass().getClassLoader().getResource("assets/icons/firstPlace.png");
+			if(imageURL != null){
+				nameLabel.setIcon(new ImageIcon(imageURL));
+			}
 			nameLabel.setIconTextGap(30);
 			nameLabel.setForeground(new Color(218, 165, 32));
 			recordLabel.setForeground(new Color(218, 165, 32));
@@ -92,7 +96,10 @@ public class RecordsPanel extends JPanel {
 		else if(pos == 1){
 			nameLabel.setFont(new Font(null, Font.BOLD, 28));
 			// Icon: https://icons8.com/icon/23873/medal-second-place
-			nameLabel.setIcon(new ImageIcon("assets/icons/secondPlace.png"));
+			URL imageURL = getClass().getClassLoader().getResource("assets/icons/secondPlace.png");
+			if(imageURL != null){
+				nameLabel.setIcon(new ImageIcon(imageURL));
+			}
 			nameLabel.setIconTextGap(15);
 			nameLabel.setForeground(new Color(192, 192, 192));
 			recordLabel.setForeground(new Color(169, 169, 169));
@@ -101,7 +108,10 @@ public class RecordsPanel extends JPanel {
 		else if(pos == 2){
 			nameLabel.setFont(new Font(null, Font.BOLD, 24));
 			// Icon: https://icons8.com/icon/33853/medal-third-place
-			nameLabel.setIcon(new ImageIcon("assets/icons/thirdPlace.png"));
+			URL imageURL = getClass().getClassLoader().getResource("assets/icons/thirdPlace.png");
+			if(imageURL != null){
+				nameLabel.setIcon(new ImageIcon(imageURL));
+			}
 			nameLabel.setIconTextGap(15);
 			nameLabel.setForeground(new Color(205, 127, 50));
 			recordLabel.setForeground(new Color(139, 69, 19));

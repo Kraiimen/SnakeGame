@@ -138,7 +138,6 @@ public class SettingsPanel extends JPanel{
 		slider.setLabelTable(labelTable);
 	}
 
-	// Setter and Getter for difficultyValue
 	private void setDifficultyValue(int difficultyValue) {
 		this.difficultyValue = difficultyValue;
 	}

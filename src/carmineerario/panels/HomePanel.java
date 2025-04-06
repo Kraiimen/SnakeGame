@@ -1,12 +1,10 @@
 package carmineerario.panels;
 
-import carmineerario.config.GameConfig;
 import carmineerario.main.MainFrame;
-import com.sun.tools.javac.Main;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.jar.Manifest;
+import java.net.URL;
 import javax.swing.*;
 
 public class HomePanel extends JPanel {
@@ -54,7 +52,10 @@ public class HomePanel extends JPanel {
     private JLabel createGameTitleLabel(){
         JLabel gameNameTitle = new JLabel("Snake Game");
         // Icon: https://icons8.com/icon/yGwrZYYkmgaX/year-of-snake
-        gameNameTitle.setIcon(new ImageIcon("assets/icons/snakeIcon.png"));
+        URL imageURL = getClass().getClassLoader().getResource("assets/icons/snakeIcon.png");
+        if(imageURL != null){
+            gameNameTitle.setIcon(new ImageIcon(imageURL));
+        }
         gameNameTitle.setIconTextGap(10);
         gameNameTitle.setAlignmentX(CENTER_ALIGNMENT);
         gameNameTitle.setFont(new Font(null, Font.BOLD, 50));

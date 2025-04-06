@@ -1,9 +1,6 @@
 package carmineerario.panels;
 
-import carmineerario.config.GameConfig;
 import carmineerario.main.MainFrame;
-import com.google.gson.annotations.SerializedName;
-import com.sun.tools.javac.Main;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -230,7 +227,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		}
 	}
 
-	// Getter and Setter for delay
+
 	public int getDelay() {
 		return delay;
 	}
@@ -246,8 +243,6 @@ public class GamePanel extends JPanel implements ActionListener{
 			}
 		}
 	}
-
-	// Getter for applesEaten
 	public int getApplesEaten() {
 		return applesEaten;
 	}
